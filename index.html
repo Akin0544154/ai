@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080808">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AI Crypto Trader">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+<title>AI Crypto Trader</title>
+<style>
+:root{color-scheme:dark;--bg:#080808;--card:#11100f;--border:#29251e;--gold:#b89a61;--gold2:#c9a867;--text:#f3efe7;--muted:#a7a198;--green:#78b88a;--red:#c66b6b}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
+body{min-height:100vh;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+main{max-width:680px;margin:auto;padding:20px 18px 42px}
+.header{display:flex;justify-content:space-between;align-items:center;margin:5px 2px 22px}.kicker{color:var(--gold);font-size:10px;letter-spacing:3px}.title{font-size:30px;font-weight:300;margin-top:5px}.dot{width:10px;height:10px;border-radius:50%;background:#555}.dot.on{background:var(--gold);box-shadow:0 0 12px #b89a6166}
+.hero{background:linear-gradient(135deg,#181512,#0d0d0d);border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:0 12px 40px #0008}.heroTop,.signalRow,.positionHeader,.row,.priceRow{display:flex;justify-content:space-between;align-items:center}.label{color:var(--muted);font-size:11px;letter-spacing:2px}.price{font-size:35px;font-weight:500;margin-top:8px}.badge{display:flex;gap:7px;align-items:center;background:#0b0b0b;border:1px solid #302a21;border-radius:16px;padding:7px 10px}.liveDot{width:7px;height:7px;border-radius:50%;background:var(--gold)}.liveText{font-size:10px;letter-spacing:1px;color:#d9d0c2}.signalRow{margin-top:28px}.muted{color:#817c74;font-size:10px;letter-spacing:1.4px}.signal{font-size:25px;font-weight:600;margin-top:5px}.buy{color:var(--green)}.sell{color:var(--red)}.confidence{text-align:right}.confidenceValue{font-size:25px;margin-top:5px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.metric,.card{background:var(--card);border:1px solid #211f1b;border-radius:16px}.metric{padding:15px}.metricValue{font-size:18px;margin-top:7px}
+.sectionTitle{font-size:13px;letter-spacing:1px;color:#d8d0c4;margin:24px 3px 10px}.card{padding:6px 16px}.row,.priceRow{padding:14px 0;border-bottom:1px solid #211f1b}.row:last-child,.priceRow:last-child{border-bottom:0}.rowLeft{display:flex;align-items:center;gap:10px}.icon{color:var(--gold);width:20px;text-align:center}.rowLabel{color:#b9b1a6;font-size:14px}.rowValue{color:#eee8de;font-size:14px}.positionHeader{padding:12px 0 16px}.positionSide{font-weight:700;color:var(--green);letter-spacing:1px}.positionAmount{color:#aaa197;font-size:13px}
+button{width:100%;border:0;border-radius:15px;padding:16px;margin-top:22px;background:linear-gradient(135deg,var(--gold2),#8f6e36);color:#080808;font-weight:800;letter-spacing:1px;font-size:14px;box-shadow:0 10px 28px #0008}button.stop{background:linear-gradient(135deg,#5b2222,#2c1111);color:#fff}.disclaimer{text-align:center;color:#66615a;font-size:11px;line-height:1.5;margin:18px 18px 0}
+.refresh{margin:12px 0 0;color:#68635d;text-align:center;font-size:11px}.settings{margin-top:20px;padding:14px;border:1px dashed #302b23;border-radius:14px}.settings summary{color:#b9b1a6;font-size:12px;cursor:pointer}.settings input{width:100%;margin-top:10px;background:#0c0c0c;border:1px solid #302b23;color:#eee;padding:11px;border-radius:10px}.settings small{color:#6e6961}
+@media(min-width:650px){main{padding-top:40px}.grid{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<main>
+  <header class="header"><div><div class="kicker">AI CRYPTO TRADER</div><div class="title">Control Center</div></div><div id="statusDot" class="dot"></div></header>
+  <section class="hero">
+    <div class="heroTop"><div><div id="symbol" class="label">BTC/USDT</div><div id="price" class="price">$108,420.50</div></div><div class="badge"><span class="liveDot"></span><span class="liveText">PAPER</span></div></div>
+    <div class="signalRow"><div><div class="muted">AI SIGNAL</div><div id="signal" class="signal buy">BUY</div></div><div class="confidence"><div class="muted">CONFIDENCE</div><div id="confidence" class="confidenceValue">78%</div></div></div>
+  </section>
+  <section class="grid">
+    <div class="metric"><div class="muted">PORTFOLIO</div><div id="equity" class="metricValue">$10,184.32</div></div>
+    <div class="metric"><div class="muted">TODAY'S P&amp;L</div><div id="pnl" class="metricValue buy">+$184.32</div></div>
+    <div class="metric"><div class="muted">RSI</div><div id="rsi" class="metricValue">61.4</div></div>
+    <div class="metric"><div class="muted">ATR</div><div id="atr" class="metricValue">$842</div></div>
+  </section>
+  <div class="sectionTitle">AI Analysis</div>
+  <section class="card">
+    <div class="row"><div class="rowLeft"><span class="icon">↗</span><span class="rowLabel">Up Probability</span></div><span id="upProb" class="rowValue">78%</span></div>
+    <div class="row"><div class="rowLeft"><span class="icon">◉</span><span class="rowLabel">RSI</span></div><span id="rsi2" class="rowValue">61.4</span></div>
+    <div class="row"><div class="rowLeft"><span class="icon">◌</span><span class="rowLabel">Model</span></div><span class="rowValue">Random Forest</span></div>
+    <div class="row"><div class="rowLeft"><span class="icon">✓</span><span class="rowLabel">Mode</span></div><span class="rowValue">Paper Trading</span></div>
+  </section>
+  <div class="sectionTitle">Open Position</div>
+  <section class="card">
+    <div class="positionHeader"><span id="side" class="positionSide">LONG</span><span id="amount" class="positionAmount">0.0112 BTC</span></div>
+    <div class="priceRow"><span class="rowLabel">Entry</span><span id="entry" class="rowValue">$107,850</span></div>
+    <div class="priceRow"><span class="rowLabel">Stop Loss</span><span id="stop" class="rowValue">$106,650</span></div>
+    <div class="priceRow"><span class="rowLabel">Take Profit</span><span id="take" class="rowValue">$111,450</span></div>
+  </section>
+  <button id="botButton">▶ START BOT</button>
+  <div id="refreshInfo" class="refresh">Demo verisi • otomatik yenileme 15 sn</div>
+  <details class="settings">
+    <summary>Backend bağlantısı (isteğe bağlı)</summary>
+    <input id="apiUrl" placeholder="https://sunucun.com" inputmode="url">
+    <small>API /api/status endpoint'i JSON döndürmelidir. HTTPS kullanın.</small>
+  </details>
+  <div class="disclaimer">Demo/paper trading. Bu uygulama yatırım tavsiyesi değildir. Gerçek emir açma bu PWA tarafından yapılmaz.</div>
+</main>
+<script src="app.js"></script>
+</body></html>
